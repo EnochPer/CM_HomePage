@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion';
 import { useRouter } from 'next/navigation';
+import HandDrawnTitle from './components/HandDrawnTitle';
 
 export default function SplashPage() {
   const router = useRouter();
@@ -22,37 +23,21 @@ export default function SplashPage() {
       </div>
 
       <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 1.2, ease: [.16, 1, .3, 1] }}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.8 }}
         className="relative z-10 flex flex-col items-center"
       >
-        <motion.h1
-          className="text-5xl sm:text-7xl font-light tracking-wider text-gray-800 mb-6"
-          initial={{ letterSpacing: '0.3em' }}
-          animate={{ letterSpacing: '0.15em' }}
-          transition={{ duration: 1.5, delay: 0.3 }}
-        >
-          BOBULI SPACE
-        </motion.h1>
-
-        <motion.p
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.8, duration: 0.8 }}
-          className="text-gray-500 text-sm tracking-widest mb-16"
-        >
-          个人艺术作品集
-        </motion.p>
+        <HandDrawnTitle subtitle="个人艺术作品集" />
 
         <motion.button
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 1.2, duration: 0.8 }}
+          transition={{ delay: 1.8, duration: 0.8 }}
           whileHover={{ scale: 1.03, y: -2 }}
           whileTap={{ scale: 0.97 }}
-          onClick={() => router.push('/home')}
-          className="ios-pill px-10 py-3 text-gray-700 text-sm tracking-wide cursor-pointer"
+          onClick={() => router.push('/illustration')}
+          className="mt-16 ios-pill px-10 py-3 text-gray-700 text-sm tracking-wide cursor-pointer"
         >
           进入作品集
         </motion.button>

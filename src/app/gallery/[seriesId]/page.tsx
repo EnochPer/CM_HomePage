@@ -50,7 +50,7 @@ export default function GalleryPage({ params }: { params: Promise<{ seriesId: st
 
   if (artworks.length === 0) {
     return (
-      <div className="min-h-screen bg-[#dce7f1] flex items-center justify-center">
+      <div className="min-h-screen bg-[#dce7f1] flex items-center justify-center pt-14">
         <div className="text-center">
           <h1 className="text-2xl text-gray-800 mb-4">系列未找到</h1>
           <Link href="/home" className="text-blue-500 hover:text-blue-600 transition-colors">
@@ -66,7 +66,7 @@ export default function GalleryPage({ params }: { params: Promise<{ seriesId: st
   return (
     <div
       ref={containerRef}
-      className="relative min-h-screen bg-[#dce7f1] flex flex-col items-center justify-center overflow-hidden selection:bg-gray-900 selection:text-white"
+      className="relative min-h-screen bg-[#dce7f1] flex flex-col items-center justify-center overflow-hidden selection:bg-gray-900 selection:text-white pt-14"
     >
       {/* Background blur circles */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
@@ -82,21 +82,8 @@ export default function GalleryPage({ params }: { params: Promise<{ seriesId: st
         />
       </div>
 
-      {/* Top Bar */}
-      <div className="absolute top-0 left-0 right-0 z-20 flex items-center px-4 sm:px-6 py-4">
-        <Link href="/home">
-          <motion.button
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            className="lightbox-pill text-white/90 text-sm"
-          >
-            ← 返回
-          </motion.button>
-        </Link>
-      </div>
-
       {/* Main Image Area */}
-      <div className="relative z-10 w-full max-w-6xl mx-auto px-4 sm:px-6 flex items-center justify-center gap-4 sm:gap-6">
+      <div className="relative z-10 w-full max-w-6xl mx-auto px-4 sm:px-6 flex items-center justify-center gap-2 sm:gap-4">
         {/* Left Arrow */}
         <motion.button
           whileHover={{ scale: 1.1 }}
@@ -133,8 +120,8 @@ export default function GalleryPage({ params }: { params: Promise<{ seriesId: st
             </AnimatePresence>
           </div>
 
-          {/* Page Counter - moved below image */}
-          <div className="lightbox-pill text-white/90 text-xs sm:text-sm mt-6">
+          {/* Page Counter */}
+          <div className="lightbox-pill text-white/90 text-xs sm:text-sm mt-4">
             <span className="font-medium">{currentIndex + 1}</span>
             <span className="text-white/50">/</span>
             <span className="text-white/50">{artworks.length}</span>
@@ -146,9 +133,9 @@ export default function GalleryPage({ params }: { params: Promise<{ seriesId: st
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.15, duration: 0.3 }}
-            className="mt-4 text-center max-w-xl"
+            className="mt-3 text-center max-w-xl"
           >
-            <h2 className="text-xl sm:text-2xl font-light text-gray-800 mb-2">
+            <h2 className="text-lg sm:text-xl font-light text-gray-800 mb-1">
               {currentArtwork.title}
             </h2>
             {currentArtwork.desc_zh && (
@@ -159,24 +146,26 @@ export default function GalleryPage({ params }: { params: Promise<{ seriesId: st
           </motion.div>
 
           {/* Dots */}
-          <div className="mt-6 flex gap-2 items-center">
-            {artworks.slice(0, Math.min(artworks.length, 20)).map((_, index) => (
-              <motion.button
-                key={index}
-                whileHover={{ scale: 1.2 }}
-                whileTap={{ scale: 0.9 }}
-                onClick={() => goToSlide(index)}
-                className={`rounded-full transition-all ${
-                  index === currentIndex
-                    ? 'w-8 h-2 bg-gray-700'
-                    : 'w-2 h-2 bg-gray-400/50 hover:bg-gray-400'
-                }`}
-              />
-            ))}
-            {artworks.length > 20 && (
-              <span className="text-xs text-gray-400 ml-1">+{artworks.length - 20}</span>
-            )}
-          </div>
+          {artworks.length > 1 && (
+            <div className="mt-4 flex gap-1.5 items-center">
+              {artworks.slice(0, Math.min(artworks.length, 20)).map((_, index) => (
+                <motion.button
+                  key={index}
+                  whileHover={{ scale: 1.2 }}
+                  whileTap={{ scale: 0.9 }}
+                  onClick={() => goToSlide(index)}
+                  className={`rounded-full transition-all ${
+                    index === currentIndex
+                      ? 'w-6 h-1.5 bg-gray-700'
+                      : 'w-1.5 h-1.5 bg-gray-400/50 hover:bg-gray-400'
+                  }`}
+                />
+              ))}
+              {artworks.length > 20 && (
+                <span className="text-xs text-gray-400 ml-1">+{artworks.length - 20}</span>
+              )}
+            </div>
+          )}
         </div>
 
         {/* Right Arrow */}
@@ -192,7 +181,7 @@ export default function GalleryPage({ params }: { params: Promise<{ seriesId: st
       </div>
 
       {/* Bottom hint */}
-      <div className="absolute bottom-6 text-gray-400 text-xs">
+      <div className="absolute bottom-4 text-gray-400 text-xs">
         点击箭头或使用键盘 ← → 切换
       </div>
     </div>
